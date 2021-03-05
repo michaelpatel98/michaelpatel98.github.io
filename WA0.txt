@@ -1,0 +1,12 @@
+## Weekly assignment 0
+This is an example of markdown.
+
+** Michael Patel **
+
+The current year is: 2021!
+
+"Knock-Knock"
+"Who's There?"
+"Needle"
+"Needle, who?"
+"Needle little help over here!"
