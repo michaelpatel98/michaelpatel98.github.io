@@ -1,0 +1,675 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Weekly Assignment 11</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reset.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/theme/solarized.min.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/plugin/highlight/monokai.min.css" id="highlight-theme">
+
+		<script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>Implementing Vega/Altair Charts into Reveal.js</h3>
+					<p>Michael Patel - Weekly Assignment 11</p>
+				</section>
+
+				<section>
+					<p>First, import Vega using script tags, in the head</p>
+					<pre><code data-trim data-noescape>
+< script src="https://cdn.jsdelivr.net/npm/vega@3">< /script>
+< script src="https://cdn.jsdelivr.net/npm/vega-lite@2">< /script>
+< script src="https://cdn.jsdelivr.net/npm/vega-embed@3">< /script>
+					</code></pre>
+				</section>
+
+				<section>
+					<p>Second, we need to implement the outline of our chart, so that we can then include our data</p>
+					<p>To do this, insert the following code into the body</p>
+					<pre><code data-trim>
+< body>
+	< div id="vis">< /div>
+	< script type="text/javascript">
+		var spec = {};  /*/ JSON dump of your chart's spec
+		var opt = {"renderer": "canvas", "actions": false};  /* Options for the embedding */
+		vegaEmbed("#vis", spec, opt);
+< /script>
+< /body>
+					</code></pre>
+				</section>
+
+				<section>
+					<p>Now, we'll need to grab the <a href="https://vega.github.io/vega/examples/bar-chart/">Vega JSON Specification</a> from the documentation, so we can add the data for our chart. Let's start with a simple bar chart.</p>
+					<p> For the bar chart, add the following code to replace the brackets in: var spec = {}</p>
+					<pre><code data-trim>
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A basic bar chart example, with value labels shown upon mouse hover.",
+  "width": 400,
+  "height": 200,
+  "padding": 5,
+
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {"category": "A", "amount": 28},
+        {"category": "B", "amount": 55},
+        {"category": "C", "amount": 43},
+        {"category": "D", "amount": 91},
+        {"category": "E", "amount": 81},
+        {"category": "F", "amount": 53},
+        {"category": "G", "amount": 19},
+        {"category": "H", "amount": 87}
+      ]
+    }
+  ],
+
+  "signals": [
+    {
+      "name": "tooltip",
+      "value": {},
+      "on": [
+        {"events": "rect:mouseover", "update": "datum"},
+        {"events": "rect:mouseout",  "update": "{}"}
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "band",
+      "domain": {"data": "table", "field": "category"},
+      "range": "width",
+      "padding": 0.05,
+      "round": true
+    },
+    {
+      "name": "yscale",
+      "domain": {"data": "table", "field": "amount"},
+      "nice": true,
+      "range": "height"
+    }
+  ],
+
+  "axes": [
+    { "orient": "bottom", "scale": "xscale" },
+    { "orient": "left", "scale": "yscale" }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data":"table"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "category"},
+          "width": {"scale": "xscale", "band": 1},
+          "y": {"scale": "yscale", "field": "amount"},
+          "y2": {"scale": "yscale", "value": 0}
+        },
+        "update": {
+          "fill": {"value": "steelblue"}
+        },
+        "hover": {
+          "fill": {"value": "red"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#333"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "signal": "tooltip.category", "band": 0.5},
+          "y": {"scale": "yscale", "signal": "tooltip.amount", "offset": -2},
+          "text": {"signal": "tooltip.amount"},
+          "fillOpacity": [
+            {"test": "datum === tooltip", "value": 0},
+            {"value": 1}
+          ]
+        }
+      }
+    }
+  ]
+}
+					</code></pre>
+
+				</section>
+
+				<section>
+					Here is our Simple Bar Chart!
+					<div id="vis"></div>
+					<script type="text/javascript">
+						var spec = {
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A basic bar chart example, with value labels shown upon mouse hover.",
+  "width": 400,
+  "height": 200,
+  "padding": 5,
+
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {"category": "A", "amount": 28},
+        {"category": "B", "amount": 55},
+        {"category": "C", "amount": 43},
+        {"category": "D", "amount": 91},
+        {"category": "E", "amount": 81},
+        {"category": "F", "amount": 53},
+        {"category": "G", "amount": 19},
+        {"category": "H", "amount": 87}
+      ]
+    }
+  ],
+
+  "signals": [
+    {
+      "name": "tooltip",
+      "value": {},
+      "on": [
+        {"events": "rect:mouseover", "update": "datum"},
+        {"events": "rect:mouseout",  "update": "{}"}
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "band",
+      "domain": {"data": "table", "field": "category"},
+      "range": "width",
+      "padding": 0.05,
+      "round": true
+    },
+    {
+      "name": "yscale",
+      "domain": {"data": "table", "field": "amount"},
+      "nice": true,
+      "range": "height"
+    }
+  ],
+
+  "axes": [
+    { "orient": "bottom", "scale": "xscale" },
+    { "orient": "left", "scale": "yscale" }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data":"table"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "category"},
+          "width": {"scale": "xscale", "band": 1},
+          "y": {"scale": "yscale", "field": "amount"},
+          "y2": {"scale": "yscale", "value": 0}
+        },
+        "update": {
+          "fill": {"value": "steelblue"}
+        },
+        "hover": {
+          "fill": {"value": "red"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#333"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "signal": "tooltip.category", "band": 0.5},
+          "y": {"scale": "yscale", "signal": "tooltip.amount", "offset": -2},
+          "text": {"signal": "tooltip.amount"},
+          "fillOpacity": [
+            {"test": "datum === tooltip", "value": 0},
+            {"value": 1}
+          ]
+        }
+      }
+    }
+  ]
+}
+						var opt = {"renderer": "canvas", "actions": false};  /* Options for the embedding */
+						vegaEmbed("#vis", spec, opt);
+					</script>
+					<p>It's cool, but not very interesting, since this data is meaningless.</p>
+				</section>
+
+				<section>
+					<p>We probably want to do this process again, with real data that wasn't hard coded</p>
+					<p>It's realtively easy! Just repeat the final step, but specify the data. Remember that when you have more than 1 Vega viz, you need to make sure their ID names are different.</p>
+					<p>To do this, I'll use <a href="https://vega.github.io/vega/examples/scatter-plot-null-values/">another example</a> from the Vega documentation related to movie scores</p>
+				</section>
+
+				<section>
+					<p>Here is the Vega JSON Specification code that I used</p>
+					<pre><code data-trim>
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A scatter plot of film statistics, with null values visualized along the axes.",
+  "width": 450,
+  "height": 450,
+  "padding": 5,
+  "autosize": {"type": "fit", "resize": true},
+
+  "signals": [
+    { "name": "yField", "value": "IMDB Rating",
+      "bind": {"input": "select", "options": ["IMDB Rating", "Rotten Tomatoes Rating", "US Gross", "Worldwide Gross"]} },
+    { "name": "xField", "value": "Rotten Tomatoes Rating",
+      "bind": {"input": "select", "options": ["IMDB Rating", "Rotten Tomatoes Rating", "US Gross", "Worldwide Gross"]} },
+    { "name": "nullSize", "value": 8 },
+    { "name": "nullGap", "update": "nullSize + 10" }
+  ],
+
+  "data": [
+    {
+      "name": "movies",
+      "url": "https://vega.github.io/vega-datasets/data/movies.json",
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.Title + ' (' + (year(datum['Release Date']) || '?') + ')'",
+          "as":   "tooltip"
+        }
+      ]
+    },
+    {
+      "name": "valid",
+      "source": "movies",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[xField] != null && datum[yField] != null"
+        }
+      ]
+    },
+    {
+      "name": "nullXY",
+      "source": "movies",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[xField] == null && datum[yField] == null"
+        },
+        { "type": "aggregate" }
+      ]
+    },
+    {
+      "name": "nullY",
+      "source": "movies",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[xField] != null && datum[yField] == null"
+        }
+      ]
+    },
+    {
+      "name": "nullX",
+      "source": "movies",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[xField] == null && datum[yField] != null"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "yscale",
+      "type": "linear",
+      "range": [{"signal": "height - nullGap"}, 0],
+      "nice": true,
+      "domain": {"data": "valid", "field": {"signal": "yField"}}
+    },
+    {
+      "name": "xscale",
+      "type": "linear",
+      "range": [{"signal": "nullGap"}, {"signal": "width"}],
+      "nice": true,
+      "domain": {"data": "valid", "field": {"signal": "xField"}}
+    }
+  ],
+
+  "axes": [
+    {
+      "orient": "bottom", "scale": "xscale", "offset": 5, "format": "s",
+      "title": {"signal": "xField"}
+    },
+    {
+      "orient": "left", "scale": "yscale", "offset": 5, "format": "s",
+      "title": {"signal": "yField"}
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "symbol",
+      "from": {"data": "valid"},
+      "encode": {
+        "enter": {
+          "size": {"value": 50},
+          "tooltip": {"field": "tooltip"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "field": {"signal": "xField"}},
+          "y": {"scale": "yscale", "field": {"signal": "yField"}},
+          "fill": {"value": "steelblue"},
+          "fillOpacity": {"value": 0.5},
+          "zindex": {"value": 0}
+        },
+        "hover": {
+          "fill": {"value": "firebrick"},
+          "fillOpacity": {"value": 1},
+          "zindex": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "nullY"},
+      "encode": {
+        "enter": {
+          "size": {"value": 50},
+          "tooltip": {"field": "tooltip"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "field": {"signal": "xField"}},
+          "y": {"signal": "height - nullSize/2"},
+          "fill": {"value": "#aaa"},
+          "fillOpacity": {"value": 0.2}
+        },
+        "hover": {
+          "fill": {"value": "firebrick"},
+          "fillOpacity": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "nullX"},
+      "encode": {
+        "enter": {
+          "size": {"value": 50},
+          "tooltip": {"field": "tooltip"}
+        },
+        "update": {
+          "x": {"signal": "nullSize/2"},
+          "y": {"scale": "yscale", "field": {"signal": "yField"}},
+          "fill": {"value": "#aaa"},
+          "fillOpacity": {"value": 0.2},
+          "zindex": {"value": 0}
+        },
+        "hover": {
+          "fill": {"value": "firebrick"},
+          "fillOpacity": {"value": 1},
+          "zindex": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "from": {"data": "nullXY"},
+      "encode": {
+        "update": {
+          "x": {"signal": "nullSize", "offset": -4},
+          "y": {"signal": "height", "offset": 13},
+          "text": {"signal": "datum.count + ' null'"},
+          "align": {"value": "right"},
+          "baseline": {"value": "top"},
+          "fill": {"value": "#999"},
+          "fontSize": {"value": 9}
+        }
+      }
+    }
+  ]
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<p style="font-size: 36px">Here is a much more interesting chart, showing the correlation between IMDb and Rotten Tomatoes ratings.</p>
+					<div id="vis1"></div>
+					<script type="text/javascript">
+						var spec = {
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A scatter plot of film statistics, with null values visualized along the axes.",
+  "width": 450,
+  "height": 450,
+  "padding": 5,
+  "autosize": {"type": "fit", "resize": true},
+
+  "signals": [
+    { "name": "yField", "value": "IMDB Rating",
+      "bind": {"input": "select", "options": ["IMDB Rating", "Rotten Tomatoes Rating", "US Gross", "Worldwide Gross"]} },
+    { "name": "xField", "value": "Rotten Tomatoes Rating",
+      "bind": {"input": "select", "options": ["IMDB Rating", "Rotten Tomatoes Rating", "US Gross", "Worldwide Gross"]} },
+    { "name": "nullSize", "value": 8 },
+    { "name": "nullGap", "update": "nullSize + 10" }
+  ],
+
+  "data": [
+    {
+      "name": "movies",
+      "url": "https://vega.github.io/vega-datasets/data/movies.json",
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.Title + ' (' + (year(datum['Release Date']) || '?') + ')'",
+          "as":   "tooltip"
+        }
+      ]
+    },
+    {
+      "name": "valid",
+      "source": "movies",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[xField] != null && datum[yField] != null"
+        }
+      ]
+    },
+    {
+      "name": "nullXY",
+      "source": "movies",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[xField] == null && datum[yField] == null"
+        },
+        { "type": "aggregate" }
+      ]
+    },
+    {
+      "name": "nullY",
+      "source": "movies",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[xField] != null && datum[yField] == null"
+        }
+      ]
+    },
+    {
+      "name": "nullX",
+      "source": "movies",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[xField] == null && datum[yField] != null"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "yscale",
+      "type": "linear",
+      "range": [{"signal": "height - nullGap"}, 0],
+      "nice": true,
+      "domain": {"data": "valid", "field": {"signal": "yField"}}
+    },
+    {
+      "name": "xscale",
+      "type": "linear",
+      "range": [{"signal": "nullGap"}, {"signal": "width"}],
+      "nice": true,
+      "domain": {"data": "valid", "field": {"signal": "xField"}}
+    }
+  ],
+
+  "axes": [
+    {
+      "orient": "bottom", "scale": "xscale", "offset": 5, "format": "s",
+      "title": {"signal": "xField"}
+    },
+    {
+      "orient": "left", "scale": "yscale", "offset": 5, "format": "s",
+      "title": {"signal": "yField"}
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "symbol",
+      "from": {"data": "valid"},
+      "encode": {
+        "enter": {
+          "size": {"value": 50},
+          "tooltip": {"field": "tooltip"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "field": {"signal": "xField"}},
+          "y": {"scale": "yscale", "field": {"signal": "yField"}},
+          "fill": {"value": "steelblue"},
+          "fillOpacity": {"value": 0.5},
+          "zindex": {"value": 0}
+        },
+        "hover": {
+          "fill": {"value": "firebrick"},
+          "fillOpacity": {"value": 1},
+          "zindex": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "nullY"},
+      "encode": {
+        "enter": {
+          "size": {"value": 50},
+          "tooltip": {"field": "tooltip"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "field": {"signal": "xField"}},
+          "y": {"signal": "height - nullSize/2"},
+          "fill": {"value": "#aaa"},
+          "fillOpacity": {"value": 0.2}
+        },
+        "hover": {
+          "fill": {"value": "firebrick"},
+          "fillOpacity": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "nullX"},
+      "encode": {
+        "enter": {
+          "size": {"value": 50},
+          "tooltip": {"field": "tooltip"}
+        },
+        "update": {
+          "x": {"signal": "nullSize/2"},
+          "y": {"scale": "yscale", "field": {"signal": "yField"}},
+          "fill": {"value": "#aaa"},
+          "fillOpacity": {"value": 0.2},
+          "zindex": {"value": 0}
+        },
+        "hover": {
+          "fill": {"value": "firebrick"},
+          "fillOpacity": {"value": 1},
+          "zindex": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "from": {"data": "nullXY"},
+      "encode": {
+        "update": {
+          "x": {"signal": "nullSize", "offset": -4},
+          "y": {"signal": "height", "offset": 13},
+          "text": {"signal": "datum.count + ' null'"},
+          "align": {"value": "right"},
+          "baseline": {"value": "top"},
+          "fill": {"value": "#999"},
+          "fontSize": {"value": 9}
+        }
+      }
+    }
+  ]
+};  /*/ JSON dump of your chart's spec
+						var opt = {"renderer": "canvas", "actions": false};  /* Options for the embedding */
+						vegaEmbed("#vis1", spec, opt);
+					</script>
+				</section>
+
+				<section>
+					<p style="font-size: 36px">It appears that the ratings line up pretty consistently, although IMDb ratings tend to be higher. There are also a few outliers that have very low ratings on one site, but very high ratings on the other. It appears as though IMDb tends to have more highly rated outliers (i.e., much higher compared to RT ratings), and Rotten Tomatoes tends to have more low rated outliers (i.e., IMDb rated them much higher than on RT).</p>
+					<p style="font-size: 36">This chart and its data are much more intesting than <a href="http://michaelpatel98.github.io/wa11.html#/4">that bar chart!</a></p>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.1.0/reveal.js"></script>
+
+
+
+
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: 'h/v',
+				// Learn about plugins: https://revealjs.com/plugins/
+				//plugins: [ RevealHighlight ]
+			});
+		</script>
+		
+	</body>
+</html>
