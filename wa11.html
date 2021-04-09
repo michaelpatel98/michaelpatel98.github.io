@@ -20,12 +20,12 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>
+				<section data-transition="zoom">
 					<h3>Implementing Vega/Altair Charts into Reveal.js</h3>
 					<p>Michael Patel - Weekly Assignment 11</p>
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					<p>First, import Vega using script tags, in the head</p>
 					<pre><code data-trim data-noescape>
 < script src="https://cdn.jsdelivr.net/npm/vega@3">< /script>
@@ -34,7 +34,7 @@
 					</code></pre>
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					<p>Second, we need to implement the outline of our chart, so that we can then include our data</p>
 					<p>To do this, insert the following code into the body</p>
 					<pre><code data-trim>
@@ -49,7 +49,7 @@
 					</code></pre>
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					<p>Now, we'll need to grab the <a href="https://vega.github.io/vega/examples/bar-chart/">Vega JSON Specification</a> from the documentation, so we can add the data for our chart. Let's start with a simple bar chart.</p>
 					<p> For the bar chart, add the following code to replace the brackets in: var spec = {}</p>
 					<pre><code data-trim>
@@ -153,7 +153,7 @@
 
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					Here is our Simple Bar Chart!
 					<div id="vis"></div>
 					<script type="text/javascript">
@@ -259,13 +259,13 @@
 					<p>It's cool, but not very interesting, since this data is meaningless.</p>
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					<p>We probably want to do this process again, with real data that wasn't hard coded</p>
 					<p>It's realtively easy! Just repeat the final step, but specify the data. Remember that when you have more than 1 Vega viz, you need to make sure their ID names are different.</p>
 					<p>To do this, I'll use <a href="https://vega.github.io/vega/examples/scatter-plot-null-values/">another example</a> from the Vega documentation related to movie scores</p>
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					<p>Here is the Vega JSON Specification code that I used</p>
 					<pre><code data-trim>
 {
@@ -454,7 +454,7 @@
 					</code></pre>
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					<p style="font-size: 36px">Here is a much more interesting chart, showing the correlation between IMDb and Rotten Tomatoes ratings.</p>
 					<div id="vis1"></div>
 					<script type="text/javascript">
@@ -646,12 +646,12 @@
 					</script>
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					<p style="font-size: 36px">It appears that the ratings line up pretty consistently, although IMDb ratings tend to be higher. There are also a few outliers that have very low ratings on one site, but very high ratings on the other. It appears as though IMDb tends to have more highly rated outliers (i.e., much higher compared to RT ratings), and Rotten Tomatoes tends to have more low rated outliers (i.e., IMDb rated them much higher than on RT).</p>
 					<p style="font-size: 36">This chart and its data are much more intesting than <a href="http://michaelpatel98.github.io/wa11.html#/4">that bar chart!</a></p>
 				</section>
 
-				<section>
+				<section data-transition="zoom">
 					<p>End</p>
 					<img src="https://media4.giphy.com/media/DBAaQ51YNSiDfM7Mq2/giphy.gif?cid=ecf05e47gm2p8iviv1q97w5uiafxp2pwccysavmjp1505469&rid=giphy.gif">
 				</section>
