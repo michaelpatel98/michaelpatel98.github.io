@@ -20,22 +20,23 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section data-transition="zoom">
+				<section data-transition="convex">
 					<h3>Visualizing Vega Datasets</h3>
 					<p>Michael Patel - Weekly Assignment 12</p>
 				</section>
 
-      <section>
+      <section data-transition="convex">
 				<section data-transition="zoom">
             <h2>Customizing Appearance</h2>
-            <p>This is from the <code><a href="https://github.com/vega/vega-datasets/blob/master/data/sp500-2000.csv" target="_blank" rel="noopener noreferrer">sp500-2000.csv</a></code> dataset:</p>
+            <p>This is from the <code><a href="https://github.com/vega/vega-datasets/blob/master/data/sp500-2000.csv" target="_blank" rel="noopener noreferrer">weather.csv</a></code> dataset:</p>
             <div id="vis-line"></div>
             <script type="text/javascript">
             var spec = {
               "width": 800,
               "height": 200,
+              "title":{"text":"Precipitaton in Seattle and New York"},
               "data": {
-                "url": "https://vega.github.io/vega-datasets/data/sp500-2000.csv"
+                "url": "https://vega.github.io/vega-datasets/data/weather.csv"
               },
               "mark": {"type":"line", "tooltip":true},
               "encoding": {
@@ -48,7 +49,7 @@
                   }
                 },
                 "y": {
-                  "field": "volume",
+                  "field": "precipitation",
                   "type":"quantitative"
                 }
               }
@@ -59,32 +60,43 @@
             </section>
 
             <section>
-              <h2>Let's make this chart a little more appealing.
+              <h2>Let's change up the chart's appearance to <a href="https://www.colorado.edu/brand/how-use/color">implement Buffs colors and fonts</a>.
             </section>
 
-            <section>
+            <section data-transition="zoom">
+              <h3>Establishing a specific style can make your data look more cohesive.</h3>
               <div id="vis-line2"></div>
               <script type="text/javascript">
                 var spec = {
-                  "background":"white",
+                  "background":"#CFB87C",
+                  "title": {
+                    "text":"Precipitaton by Date",
+                  },
                   "width": 800,
                   "height": 200,
-                  "data": {
-                    "url": "https://vega.github.io/vega-datasets/data/sp500-2000.csv"
+                  "config": {
+                    "font":"Helvetica"
                   },
-                  "mark": {"type":"line", "tooltip":true, "color":"#615007"},
+                  "data": {
+                    "url": "https://vega.github.io/vega-datasets/data/weather.csv"
+                  },
+                  "mark": {"type":"line", "tooltip":true, "color":"#565A5C"},
                   "encoding": {
                     "x": {
                       "field": "date",
                       "type":"nominal",
                       //"sort":"y",
                       "axis":{
-                        "labelOverlap":"parity"
+                        "labelOverlap":"parity",
+                        "title":"Date"
                       }
                     },
                     "y": {
-                      "field": "close",
-                      "type":"quantitative"
+                      "field": "precipitation",
+                      "type":"quantitative",
+                      "axis": {
+                        "title":"Precipitaton"
+                      }
                     }
                   }
                   };
@@ -92,44 +104,113 @@
                 vegaEmbed("#vis-line2", spec, opt);
             </script>
             </section>
+
+            <section>
+              <p>Here's a codeblock showing how to implement these customizations.</p>
+              <pre><code data-trim class='js' data-line-numbers=2|8-9|14>
+                var spec = {
+                  "background":"#CFB87C",
+                  "title": {
+                    "text":"Precipitaton by Date",
+                  },
+                  "width": 800,
+                  "height": 200,
+                  "config": {
+                    "font":"Helvetica"
+                  },
+                  "data": {
+                    "url": "https://vega.github.io/vega-datasets/data/weather.csv"
+                  },
+                  "mark": {"type":"line", "tooltip":true, "color":"#565A5C"},
+                  "encoding": {
+                    "x": {
+                      "field": "date",
+                      "type":"nominal",
+                      //"sort":"y",
+                      "axis":{
+                        "labelOverlap":"parity",
+                        "title":"Date"
+                      }
+                    },
+                    "y": {
+                      "field": "precipitation",
+                      "type":"quantitative",
+                      "axis": {
+                        "title":"Precipitaton"
+                      }
+                    }
+                  }
+                  };
+              </code></pre>
+            </section>
 				</section>
 
-        <section data-transition="zoom">
-            <h2>Weather Data</h2>
-            <p>This dataset includes weather data in Seattle and New York from 2012 through 2015</p>
-            <p>This is <code><a href="https://github.com/vega/vega-datasets/blob/master/data/weather.csv" target="_blank" rel="noopener noreferrer">weather.csv</a></code> dataset:</p>
-            <div id="vis-bar1"></div>
+        <section data-transition="convex">
+          <section data-transition="convex">
+            <h2>That's great, but we have data on New York and Seattle, so let's display that. </h2>
+          </section>
+
+          <section data-transition="zoom">
+            Now we can see how the trends differ by city, which gives a much different interpretation.
+            <div id="vis-two"></div>
             <script type="text/javascript">
             var spec = {
-              "width": 1000,
-              "height": 200,
-              "data": {
-                "url": "https://vega.github.io/vega-datasets/data/weather.csv"
-              },
-              "mark": "circle",
-              "encoding": {
-                "x": {
-                  "field": "weather",
-                  "type":"nominal",
-                  "sort":"-y"
-                },
-                "y": {
-                  "field": "precipitation",
-                  "type":"quantitative"
-                },
-                "color": {
-                  "field": "location",
-                  "type":"nominal"
-                },
-                "tooltip": {
-                  "field":"location",
-                  "type":"nominal"
-                }
-              }
-              };
+                  "background":"#CFB87C",
+                  "title": {
+                    "text":"Precipitaton by City by Date",
+                  },
+                  "width": 800,
+                  "height": 200,
+                  "config": {
+                    "font":"Helvetica"
+                  },
+                  "data": {
+                    "url": "https://vega.github.io/vega-datasets/data/weather.csv"
+                  },
+                  "mark": {"type":"line", "tooltip":true},
+                  "encoding": {
+                    "x": {
+                      "field": "date",
+                      "type":"nominal",
+                      //"sort":"y",
+                      "axis":{
+                        "labelOverlap":"parity",
+                        "title":"Date"
+                      }
+                    },
+                    "y": {
+                      "field": "precipitation",
+                      "type":"quantitative",
+                      "axis": {
+                        "title":"Precipitaton"
+                      }
+                    },
+                    "color":{
+                      "field":"location",
+                    }
+                  }
+                  };
             var opt = {"renderer": "canvas", "actions": false};
-            vegaEmbed("#vis-bar1", spec, opt);
+            vegaEmbed("#vis-two", spec, opt);
             </script>
+          </section>
+
+          <section>
+            This was done quite simply, just add the color field inside the encoding.
+            <code><pre>
+              "encoding": {
+                "color":{
+                      "field":"location",
+                    }
+              }
+            </pre></code>
+          </section>
+
+        </section>
+
+        <section data-transition="convex">
+          <p>This facet allows us to understand the data in a new way. As we can see, Seattle has more consistent rainfall, while New York has some very high spikes in the middle months. From what we already know about these two cities, that seems to make sense.</p>
+          
         </section>
       </div>
     </div>
