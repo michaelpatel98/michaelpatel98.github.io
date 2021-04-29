@@ -1,68 +1,53 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<style>
-		#mainHeader {text-align: center; font-family: monospace;font-style: oblique}
-		#subHeader {background-color: black; color: gold; text-align: center; font-family: monospace;font-style: oblique;}
-		.paragraph {font-family: monospace;
-			text-indent: 2%}
-		.footer {font-style: oblique; font-weight: bold;}
-		.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-	</style>
-<h1 id="mainHeader"> Weekly Assignment #14 </h1>
-<h2 id="subHeader"> How Should we Think About Presenting The Office? </h2>
-<title>Michael Patel: WA14</title>
-</head>
-
+<html lang="en">
+<title>Michael Patel WA14</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
 <body>
-<div class="paragraph">
-<p>
-When it comes to television shows, or anything in the entertainment industry, viewership and ratings are widely thought of as two of the most important metrics for success. While each has its own individual impact, many wonder which is more important, and what will lead to a more successful TV show. Should firms market heavily in order to draw as many viewers as possible, or should they focus more on having the best possible product? Does a good show attract viewership automatically, or do popular shows just keep getting better? <a href="https://theoffice.fandom.com/wiki/Main_Page">The Office</a> is a prime example in thinking about these questions. It was one of the most popular shows of its time, and it aired for nearly a decade. Especially now, people look back on media and question whether it was over or under-rated. I will look to see whether or not The Office deserves its high praise, or if it is simply overrated by mainstream media.
-</p>
-</div>
 
-<div class="paragraph">
-<p>
-	The Office was a re-adaptation of the earlier <a href="https://theoffice.fandom.com/wiki/The_Office_(UK)">British version</a> of the same name. The Brits' version wasn't rather smashing, in terms of success, but, of course, it did lead to the American success. With its recent removal from Netflix, it is interesting to look back on the success of the show. Netflix obviously made the show quite popular, with its on-demand availability, but the Office had already received high praise. Still, streaming is a newer phenomenon, and it has an undeniable effect. From music to movies, most forms of entertainment go through streaming. In 2020, its final year on the platform, <a href="https://qz.com/1956723/the-office-is-the-most-popular-tv-show-on-streaming/#:~:text=The%20Office%20was%20by%20far,yes%2C%20billion)%20minutes%20streamed.">The Office dwarfed other shows</a> in terms of minutes watched. For a show that ended over seven years ago - to still be this popular - it is apparent why NBC wants to control its rights.  
-	
-</p>
-</div>
-
-
-
-<div class="paragraph">
-<p>
-	Starting with the dataset, I found that Ratings and Viewership were fairly connected. Using R, I found they had an r-squared value of about 0.487. <a href="https://blog.minitab.com/en/adventures-in-statistics-2/regression-analysis-how-do-i-interpret-r-squared-and-assess-the-goodness-of-fit">The r-squared value</a> tells us about the correlation between two variables - it ranges from 0 to 1, where 1 means perfect correlation and 0 means no correlation. A value of 0.487 isn't high correlation, by any means, but it does certainly imply the two are connected. Visually, there doesn't seem to be much correlation between ratings and viewership, even on the more popular episodes. Although towards the end of the show, around season seven, ratings and viewship both start to fall off, viewership more noticeably. Of course, this is around the same time when Steve Carrell left the show, and so surely there were many fans who stopped watching when Michael left. However, this may also show just how difficult it is to sustain success as a top show. It is slightly difficult to see on the graph below, but the dark grey represents the viewership, in millions per episode, and the yellow shows the IMDb rating for each episode.
-</p>
-</div>
-<img src = "Sheet.png" alt="Graph1" width=100% height=35%>
-
-<div class="paragraph">
-<p>
-	Looking more deeply into the data showed us how ratings and viewership were connected. It was interesting to see that the mean rating was about 8.2, and the mean viewership was about 7.2 million. This was especially of interest when it came to outliers. We could see in the graphic, that there was not too much of a fluctuation in ratings, and it didn't seem as if the viewership had much effect on whether there would be a much higher or lower rating. Both the overall trends and the outliers were more evident in terms of viewership instead of ratings. Maybe this implies the Office was simply a good show, and it's success isn't sensitive to how many people are watching. It could also show that there simply isn't much fluctuation, in terms of ratings, for a show as popular as the Office - people just won't rate episodes are very low, because they still see value in the show itself. 
-</p>
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More"><a href="index.html" class="w3-bar-item w3-button">Back to Assignments </a><i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="bootstrap/template/index.html" class="w3-bar-item w3-button">WA 13</a>
+        <a href="wa12.html" class="w3-bar-item w3-button">WA 12</a>
+        <a href="wa11.html" class="w3-bar-item w3-button">WA 11</a>
+      </div>
+    </div>
+    <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+  </div>
 </div>
 
 
-<div class="paragraph">
-<p>
-	Overall, it is hard to comment on whether something is overrated or not. In the case of The Office, its success seemed to be inevitable. After the show got on the ground running, it had a very solid run for several years. For a show to average more than 8/10 over nine seasons, you know that the creators are doing something right. Ratings and views might not be the most effective measurements, but they are certainly very tangible metrics, and they can help us understand comparisons. In the future, it would be interesting to see how Netflix changed the shows popularity. It would seem plausible that there was a change in the overall ratings from when the show was actively airing, versus streaming-only. 
-</p>
-</div>
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-<div class="footer">
-By the way, here is where I got my data from: <a href="https://www.kaggle.com/nehaprabhavalkar/the-office-dataset?select=the_office_series.csv">THE OFFICE DATA</a>
-It includes data from each episode, including the season, air date, duration, IMDb rating, total views, and other information about each episode, like a description, directors, writers, and guest stars.
-</div>
-
-<p style="text-align: center; font-weight: bold">Thanks for reading!
-</p>
-<img class = "center" src="https://media4.giphy.com/media/V4OJOJx9nKOaI/giphy.gif?cid=ecf05e47es1vxnnyt8ug38051krvlx1fduhh86pqeh8hxhr8&rid=giphy.gif" alt ="Mike's Dance">
+  <!-- The Band Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <h2 class="w3-wide">Revisiting The Office</h2>
+	<p class="w3-justify">
+		In <a href="WA4.html">weekly assignment 4</a>, I wrote about The Office, looking at ratings by episode. Admittedly, the analysis wasn't all that interesting, and the presentation was not overly pleasing. And since the rest of the course provided me with a plethora of tools, it is important to reconsider how to present this data. In order to begin thinking about this, I will consider three groups as an audience for presentation: a group with similar technical skills to me; the general public; and kids/teens.
+	</p>
+	<p class="w3-justify">
+		First, an audience who is on a similar comfort level as me, in terms of data analysis and data in general. This group will know how to interpret data, will want to see code, and will be more technical, so it can be more interactive. For a group like this, a notebook would likely be most appropriate. Using Jupyter notebooks, for example, would allow the audience to look at the code and the visualizaitons at the same time. Being able to see the code will allow this group to judge my actual analysis, and therefore, they will get an unbiased story. If, for example, my techniques were a bit misleading, it would be pretty easy to see in what ways. From previous work of mine, <a href="wa7.html">THIS</a> is a decent example of how it can be useful for the codeblocks to be shown, that way it is easier to see how the visualizations are being created. This also helps for learning, as having documentation makes it much easier to be able to replicate things. In the case of presenting data about the popularity of the Office, it would be useful for this audience to see where the data came from, that way they can analyze it themselves if they want. It would also allow them to see specific calculations or aggregations that I may have made in my presentation, which can help improve their understanding of the data.
+	</p>
+	<p class="w3-justify">
+		Second, the general public, who will have a wide range of technical ability. The general public will require very clear and transparent information, since it is very important to avoid bias, while simultaneously allowing them to make their own conclusions. If the storyline is fed directly to them, this could cause confirmation bias, which they might not even realize, so while the story may guide them to conclusions, it cannot force them there. It is probably pretty important to include a wide range of data and many different visualizations. That way, people can obtain a complete perspective, and therefore have an unbiased takeaway from the presentaion. 
+	</p>
+	<p class="w3-justify">
+		Finally, the final audience for presentation will be kids or younger people, probably middle/high school. This group is comfortable and excited about technology, but maybe not very intelligent about what the data <i>means</i> yet. Kids will also be keen on interacting with the data in a fun way, since they know <i>how</i> to use the technology. For this group, an interactive webpage would likely be a good option. For a TV show, younger kids would probably want something pretty immersive, in order to keep their attention and make the data seem interesting. While TV data is not really too complicated, there may be cases where some statistical analysis is performed, or maybe regression analysis, and so it is important not to confuse the audience. Sometimes, data can be complex, and so using interaction can help give the audience the tools to discover and understand the data on their own. <a href="https://pudding.cool/2017/08/the-office/">Something like THIS</a> or <a href="https://pudding.cool/2021/01/cool/">THIS</a> could be an example of how data could be presented in an entertaining way.
+	</p>
 
 </body>
-</head>
+</html>
