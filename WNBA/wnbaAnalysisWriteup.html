@@ -17,21 +17,15 @@
 <h3 style="text-align: center; font-family: times">Michael Patel</h3>
 <h4 style="text-align: center; font-family: times">April, 2021</h4>
 
-<h4 style="font-family: arial">Precondition</h4>
 
-<i>1. Learning:</i> In your write-up, provide a brief background for your target problem. Make sure to describe the problem and why it matters.
 
 <p id="paragraph">When it comes to women&rsquo;s sports in America, there is a severe lack of representation. While the Women&rsquo;s National Basketball Association (WNBA) may seem like it is a more equal-to-the-men&rsquo;s league, it certainly is not. The women make an average salary estimated at about one-hundred thousand dollars, compared to an average of over seven million dollars in the men&rsquo;s league. Additionally, the average men&rsquo;s rookie takes home a salary of over eight-hundred thousand dollars.</p>
     
 <p id="paragraph">While there may be some valid reasons as to why some marginal differences exist, the fact that the wage gap is this large is shocking, and rather discomforting. Organizations, like the NCAA, have frequently made statements about striving for equality, but have not followed through with their actions. It&rsquo;s about time the women get the respect they have earned. </p>
 
-<i>2. Winnowing</i>: Describe the data that you will use to explore that problem. Make sure to talk about the background of the data (e.g., where does it come from, what bias might it have, etc) and why it&rsquo;s useful for your question as well as including a link to the source article. 
 
 <p id="paragraph">The dataset used is from <a href="https://fivethirtyeight.com/features/its-time-to-give-basketballs-other-goat-her-due/">FiveThirtyEight</a>, downloaded from <a href="https://github.com/fivethirtyeight/WNBA-stats/">GitHub</a>. Since the WNBA began in 1997, some of the statistics will likely be biased towards newer players, or at least those who were younger at the inception of the league. The player of focus in the article is Cynthia Cooper-Dyke, who first retired from the WNBA in 2000, at the age of 37. She was the finals MVP all four years she played in the WNBA, something only one NBA player, Michael Jordan, can top. The data visualizations provided in the article are rather limited, as there are only three of them. Additionally, the data analysis is centered on the late 1990s, when Cooper-Dyke was in the league. Therefore, it will be pertinent to allow the user to interpret the data independently in order to draw conclusions about the state of the WNBA, rather than focusing on one team, player, or time frame. The second file includes team data, which shows data from each game from 1997 through 2019. This file also includes a composite ELO rating, to show relative strength of teams.</p>
-
-<h4 style="font-family: arial">Core</h4>
-
-<i>3. Discover.</i> Characterize your problem by identifying at least two tasks that you will want to conduct with your data, drawing either on your prior knowledge or the content of the article to scaffold your investigation. Enumerate the tasks using the why/how/what/where/when/who framework we talked about in class (Lecture 15 has more details). 
+ 
 
 <p id="paragraph">Tasks are the reason why the visualization tool is being used in the first place. High-level tasks refer to the purpose of the visualization, middle-level is what the user is doing, and low-level is what the user is looking for. Using the why/how/what/where/when/who framework, I will go through two tasks that will help characterize the problem and shape the visualization.</p>
 
@@ -41,14 +35,9 @@ The goal of the first task is to give the user the ability to discern, for thems
 <p id="paragraph">Task 2:
 For the second task, users will look at teams in the WNBA, and similar to the first task, will be more exploratory. It will be important that the user understands both players and teams in the league, so that their knowledge is more sound. Similar to the first task, users will be able to filter and aggregate data; this time, looking at which teams perform the best over the years. The data will seek to explore how teams have risen and fallen over the years, and it will be useful in comparison with the player data, in order to show how some players have quite an effect on team success.</p>
 
-<i>4. Design:</i> Create a sketch of your initial prototype. Note that this sketch can be drawn from your work either in Assignment 2 or in the source article, but should include some design iteration to support your target tasks. Add brief design justifications and discussions of the trade-offs of key design choices in the sketch, being sure the discussion is closely tied to your target tasks. Make sure to include a copy of the sketch in your write-up. 
-
-<p><a href="module3sketch.jpg">Sketch Here</a></p>
 
 <p id="paragraph">My sketch includes two line graphs, one of which for players, and the other for teams. In the source article, the author decides to use two tables and one line graph. While the tables are good in terms of precise comparisons, it is difficult to compare trends, and this is why I decided to go with the line graphs. In the article, the line graph describes the ELO rating for one team, the Houston Comets. Still, this line graph only shows one team, and it is somewhat difficult to observe specific values, so an interactive tooltip, to display each value, would be beneficial. In my sketch, I have allowed for multiple lines, where each team or player would represent one line. There is also a filtering selection, where the user would select which teams or players they want to see along with how many, and how they are sorted. Further, they would be able to change the statistic being presented.</p>
 
-
-<i>5. Implement:</i> Implement your design as a more polished digital or physical data representation. You can use any tool of your choosing, but if you elect to use a WYSIWYG tool like Tableau or Excel, please incorporate design choices beyond the defaults provided by the tool. Note how you&rsquo;ve implemented your solution, how it addresses your core tasks, and include at least one image of the visualization in the write-up. 
 <div id="vis" style="align-content: center;align-items: center"></div>
 					<script type="text/javascript">
 						var spec = {
@@ -2563,14 +2552,13 @@ For the second task, users will look at teams in the WNBA, and similar to the fi
  <p id="paragraph">
  	This visualization allows the user to choose their y-axis. Of course, some bias may exist, considering I have aggregated the ten most valuable players (measured by average wins generated by season). The reason I chose to do this was simply the lack of space for any more. I did not want the graph to get overcrowded. Still, it is quite interesting to compare these players across a number of statistical categories, especially since these players are quite literally the most valuable. All ten players appear in the top 10, when it comes to average wins generated per year, and it is interesting to see the different career trends of each player. Furthermore, the color scheme used for the players lines up perfectly with the category10 color scheme, allowing for obvious differences in the line colors. This helps make each player stand out. Note the tooltip, as well.
  </p>
-<i>6. Deploy:</i> Use your visualization with your target data to conduct the tasks you outlined in Step 3. Note your observations about the data gained through these tasks. 
+
 
 <p id="paragraph">
 	Cynthia Cooper holds the highest peak, in terms of Wins Generated, in the league's history. Lauren Jackson has an insanely high peak, in terms of PER (Player Efficiency Rating), and she dominated that category for a few years. Interestingly, these players all have similar USG_pct, or Usage Percentage, which implies that they are frequently facilitating the offense, something that makes sense for these elite-level players. Similarly, these players have <em>very</em> similar TS_pct, or Total Shooting Percentages. This is even more intriguing, since it isn't necessarily expected that they all shoot similar percentages. Total Shooting percentage incorporates both the 3-point field goal and free-throws, so for example, if a player only shoots 3-pointers and averages 20 points, this will be weighted as lower than a player who shoots only 2-pointers and averages the same 20. Considering this explanation, it makes it even more surprising that these players have Total Shooting percentages between, essentially, 50% and 60%, for their careers. Still, there are some major peaks and troughs, like Nneka Ogwumike's near 73.7% in 2016.  
 </p>
 	
- 
-<i>7. Iterate:</i> Note at least one new task you&rsquo;d conduct now that you&rsquo;ve had a chance to investigate your dataset. Describe how you would change your solution to accommodate that task. 
+
 
 <p id="paragraph">
 	In order to avoid any bias, it would be good to allow the user to have even more control over the data being displayed. In order to do this, I can easily add more selections to the Y-Axis. Still, the players are pretty set in stone, so it would be good to allow the data to adapt to itself, meaning it will display the top 10 players for the statistic specified. 
@@ -2580,13 +2568,11 @@ For the second task, users will look at teams in the WNBA, and similar to the fi
 
 <h4 style="font-family: arial">Analysis</h4>
 
-<i>8. Reflect, Pt 1:</i> Describe what your solution tells you about your target problem. Note that you will do this with your domain expert hat on.
 
 <p id="paragraph">
 	The target problem was to simply explore WNBA data. This was done by looking at both player and team data, which gave the ability to see, simply, who stands out. In the source article, the typical reader may certainly draw some meaningful conclusions, however, there is clear bias. Some may see the tables and recognize a few names that stand out, but the article's focus is on declaring Cynthia Cooper-Dyke the greatest of all time. While there is certainly some merit to that, she had a short stint in the league, despite dominating previously, overseas. The WNBA is only becoming more popular, and with that, new players will emerge to challenge the greats of the past. This has already begun, however, as we can see in the new visualization trends that I created. My solution allows the user to draw their own conclusions, which was the main target in the first place. After all, if a player truly is the greatest, it should probably be a general consensus among the public. Still, my solution is not perfect, since Cooper-Dyke's career came to a close at the relative beginning of the league, and so her true dominance is not displayed. Addressing this issue would require additional data, and likely some major data cleaning. Furthermore, I also looked at the team data, which was somewhat useful in targeting the problem as well. The main issue with the team data was a lack of depth and formatting. While this was an obstacle, data was still able to be collected and presented, giving a more general context of the league. 
 </p> 
  
-<i>9. Reflect, Pt2:</i> Describe what your solution tells you about designing visualizations for your target problem. Note that you will do this with your designer hat on.
 
 <p id="paragraph">
 	In terms of design, my goal was to utilize a line graph that displayed each player for a specified statistic. It was important to be able to decipher between each statistical category and each player or team. I did this by defining the category10 color scheme, which includes 10 distinct colors, and so the lines were very obvious in their trends. I chose to use the line graph simply to show trends. Line graphs inherently allow the viewer to see how players careers played out, and this was an important factor in addressing my target problem. I liked using the dropdown menu, so that users could feel like they are choosing the data, in a way. This allows for the user to have a customizable experience, where they will be able to make their own conclusions.
